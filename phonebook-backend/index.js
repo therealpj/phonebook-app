@@ -35,7 +35,6 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons', (request, response) => {
-  console.log(persons)
 
     response.json(persons)
 })
@@ -96,7 +95,6 @@ app.put('/api/persons/:id', (request, response) => {
       ...person
     }
     persons = persons.map(p => p.id === id ? newPerson : p)
-    console.log(newPerson)
     response.json(newPerson)
   }
   else response.status(404).end()
