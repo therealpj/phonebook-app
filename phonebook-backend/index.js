@@ -31,9 +31,12 @@ app.get('/info', (request, response) => {
 
     </div>
     `)
+
 })
 
 app.get('/api/persons', (request, response) => {
+  console.log(persons)
+
     response.json(persons)
 })
 
@@ -50,7 +53,6 @@ const generateId = () => { return Math.floor(Math.random() * 10000000) }
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
-    console.log(body)
     if (!body.name || !body.number) {
       return response.status(400).json({ 
         error: 'name/number missing' 
@@ -71,8 +73,6 @@ app.post('/api/persons', (request, response) => {
     }
   
     persons = persons.concat(person)
-
-    console.log(person)
     response.json(person)
   })
 
@@ -85,6 +85,21 @@ app.delete('/api/persons/:id', (request, response) => {
         response.status(204).end()
     }
     else response.status(404).end()
+})
+
+app.put('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  const person = persons.find(person => person.id === id)
+  if (person) {
+    const newPerson = {
+      number: request.params.number,
+      ...person
+    }
+    persons = persons.map(p => p.id === id ? newPerson : p)
+    console.log(newPerson)
+    response.json(newPerson)
+  }
+  else response.status(404).end()
 })
 
 // middleware, runs last
