@@ -9,5 +9,9 @@ content-type: application/json
     "number": "312-123-634598"
 } 
 
+###
+
+GET http://localhost:3001/api/persons/646c96b20fb47a7f6ed8f194
+
 ### 
-DELETE http://localhost:3001/api/persons/6577351/
+DELETE http://localhost:3001/api/persons/646c96b20fb47a7f6ed8f194/

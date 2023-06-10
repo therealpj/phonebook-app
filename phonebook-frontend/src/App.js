@@ -65,8 +65,14 @@ const App = () => {
         number: newNumber,
         visible: true
       }
-      // setPersons(persons.concat(person))
-      personService.create(person).then(person => setPersons(persons.concat(person)))
+      personService
+      .create(person)
+      .then(person => setPersons(persons.concat(person)))
+      .catch(error => {
+        setNotification(`${error.response.data.error}`, "error")
+        console.log(error.response.data.error)
+      })
+
       setNotification(`${newName} added to phonebook`, "success")
       setNewName('')
       setNewNumber('')
